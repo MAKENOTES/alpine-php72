@@ -1,6 +1,7 @@
 ## 1.快速使用
 
 1. docker build -t "apline-php72" .
+[docker build -t "apline-php72" . --no-cache]
 
 2. docker image tag apline-php72 makenotes/apline_php72:1.1
 

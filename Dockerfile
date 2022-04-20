@@ -1,7 +1,7 @@
 FROM php:7.2.34-fpm-alpine
 
 ARG TZ=Asia/Shanghai
-ARG PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,memcached,mongodb,bcmath,exif,imagick,pcntl,protobuf,soap,sockets,swoole,yaf,zip
+ARG PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,memcached,mongodb,bcmath,exif,imagick,pcntl,protobuf,soap,sockets,swoole,yaf,zip,imap,mailparse
 ARG CONTAINER_PACKAGE_URL=mirrors.aliyun.com
 
 
@@ -11,7 +11,7 @@ RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONT
 COPY ./extensions /tmp/extensions
 WORKDIR /tmp/extensions
 RUN chmod +x install.sh \
-    && sh install.sh \
+    && sh install.sh  | tee /tmp/install_php.log \
     && rm -rf /tmp/extensions
 
 ADD ./extensions/install-php-extensions  /usr/local/bin/

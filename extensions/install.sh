@@ -711,6 +711,11 @@ if [[ -z "${EXTENSIONS##*,sdebug,*}" ]]; then
         echo "---------- PHP Version>= 7.2----------"
     fi
 fi
+if [[ -z "${EXTENSIONS##*,mailparse,*}" ]]; then
+    echo "---------- Install mailparse ----------"
+    installExtensionFromTgz mailparse-3.1.3
+fi
+echo "---------- Install end ----------"
 
 if [ "${PHP_EXTENSIONS}" != "" ]; then
     apk del .build-deps \
